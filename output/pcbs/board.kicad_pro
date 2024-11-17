@@ -180,7 +180,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "board_l.kicad_pro",
+    "filename": "board.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -375,138 +375,6 @@
       },
       {
         "netclass": "Default",
-        "pattern": "mirror_outer_mod"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_outer_bottom"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_outer_home"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_outer_top"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_outer_num"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_pinky_mod"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_pinky_bottom"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_pinky_home"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_pinky_top"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_pinky_num"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_ring_mod"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_ring_bottom"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_ring_home"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_ring_top"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_ring_num"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_middle_mod"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_middle_bottom"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_middle_home"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_middle_top"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_middle_num"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_index_mod"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_index_bottom"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_index_home"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_index_top"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_index_num"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_inner_bottom"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_inner_home"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_inner_top"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_inner_num"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_bracket_bottom"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_base_cluster"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_space_cluster"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "mirror_magic_cluster"
-      },
-      {
-        "netclass": "Default",
         "pattern": "P15"
       },
       {
@@ -571,8 +439,8 @@
     "last_paths": {
       "gencad": "",
       "idf": "",
-      "netlist": "",
-      "specctra_dsn": "",
+      "netlist": "../../../../../../Applications/KiCad/KiCad.app/Contents/Applications/",
+      "specctra_dsn": "../../board.dsn",
       "step": "",
       "vrml": ""
     },

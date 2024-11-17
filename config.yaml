@@ -237,8 +237,8 @@ pcbs:
       trrs:
         what: trrs
         params:
-          reverse: false
-          symmetric: false
+          reverse: true
+          symmetric: true
           A: GND
           B: GND
           C: P2

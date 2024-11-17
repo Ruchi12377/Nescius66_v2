@@ -1,0 +1,290 @@
+units:
+  # Proxy Spacing Variables
+  kx: u
+  ky: u
+  # Padding Variables
+  px: kx + 4
+  py: ky + 4
+  # Defaults to M2 Screws
+  screwSize: 1.5
+  standoffSize: 2.5
+points:
+  zones:
+    matrix:
+      key:
+        padding: 1ky
+        spread: 1kx
+      anchor:
+        shift: [50, -150]
+      columns:
+        outer:
+          key:
+            column_net: P14
+        pinky:
+          key:
+            stagger: 5
+            column_net: P16
+        ring:
+          key:
+            stagger: 2.5
+            column_net: P10
+        middle:
+          key:
+            stagger: 5
+            column_net: P6
+        index:
+          key:
+            stagger: -2.5
+            column_net: P7
+        inner:
+          rows.mod.skip: true
+          key:
+            stagger: -5
+            column_net: P8
+        bracket:
+          key:
+            splay: -5
+            column_net: P9
+          rows:
+            mod.skip: true
+            home.skip: true
+            top.skip: true
+            num.skip: true
+            bottom:
+              shift: [4.5, -5]
+
+      rows:
+        mod:
+          row_net: P15
+        bottom:
+          row_net: P18
+        home:
+          row_net: P19
+        top:
+          row_net: P20
+        num:
+          row_net: P21
+    thumbs:
+      anchor:
+        ref: matrix_inner_mod
+        shift: [0, -8]
+      columns:
+        base:
+          key:
+            splay: -5
+            column_net: P8
+        space:
+          key:
+            height: 1.5kx
+            splay: -10
+            shift: [2, 3]
+            column_net: P9
+        magic:
+          key:
+            splay: -10
+            shift: [4, -3]
+            column_net: P9
+      rows:
+        cluster:
+          row_net: P15
+outlines:
+  raw:
+   - what: rectangle
+     where: true
+     size: [px, py]
+  keys:
+    - what: rectangle
+      where: true
+      size: [kx-0.5,ky-0.5]
+  board:
+    - what: polygon
+      operation: stack
+      fillet: 2
+      points:
+        # upper lines
+        - ref: matrix_inner_num
+          shift: [0.5px, 0.5py]
+        - ref: matrix_index_num
+          shift: [0.5px, 0.5py]
+        - ref: matrix_middle_num
+          shift: [0.5px, 0.5py]
+        - ref: matrix_middle_num
+          shift: [-0.5px, 0.5py]
+        - ref: matrix_ring_num
+          shift: [-0.5px, 0.5py]
+        - ref: matrix_pinky_num
+          shift: [-0.5px, 0.5py]
+        - ref: matrix_outer_num
+          shift: [-0.5px, 0.5py]
+
+        # lower lines
+        - ref: matrix_outer_mod
+          shift: [-0.5px, -0.5py]
+        - ref: matrix_outer_mod
+          shift: [0.5px, -0.5py]
+        - ref: matrix_pinky_mod
+          shift: [0.5px, -0.5py]
+        - ref: matrix_ring_mod
+          shift: [0.5px, -0.5py]
+        - ref: matrix_index_mod
+          shift: [-0.5px, -0.5py]
+        - ref: matrix_index_mod
+          shift: [0px, -0.5py]
+
+        # vertical lines
+        - ref: thumbs_base_cluster
+          shift: [-0.5px, -0.5py]
+        - ref: thumbs_base_cluster
+          shift: [0.5px, -0.5py]
+        - ref: thumbs_magic_cluster
+          shift: [-0.5px, -0.5py]
+        - ref: thumbs_magic_cluster
+          shift: [0.5px, -0.5py]
+        - ref: thumbs_magic_cluster
+          shift: [0.5px, 0.5py]
+        - ref: thumbs_space_cluster
+          shift: [0.55px, 0.5py]
+
+        - ref: matrix_inner_top
+          shift: [1.6px, 0.6py]
+        - ref: matrix_inner_top
+          shift: [0.5px, 0.6py]
+  combo:
+    - name: board
+    - operation: subtract
+      name: keys
+  mounting:
+      - what: circle
+        radius: screwSize
+        where:
+          ref: matrix_pinky_num
+          shift: [-0.5kx, -0.5ky]
+      - what: circle
+        radius: screwSize
+        where:
+          ref: matrix_inner_num
+          shift: [0.5kx, -0.5ky]
+      - what: circle
+        radius: screwSize
+        where:
+          ref: matrix_outer_mod
+          shift: [0.5kx, -0.25ky]
+      - what: circle
+        radius: screwSize
+        where:
+          ref: thumbs_space_cluster
+          shift: [0.5kx, -0.5ky]
+  standoff:
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: matrix_pinky_num
+        shift: [-0.5kx, -0.5ky]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: matrix_inner_num
+        shift: [0.5kx, -0.5ky]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: matrix_outer_mod
+        shift: [0.5kx, -0.25ky]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: thumbs_space_cluster
+        shift: [0.5kx, -0.5ky]
+pcbs:
+  board:
+    outlines:
+        main:
+          outline: board
+    footprints:
+      mx_hotswap:
+        what: mx
+        where: true
+        params:
+          keycaps: true
+          reverse: false
+          hotswap: true
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+      diode:
+        what: diode
+        where: true
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [0, -5]
+      mcu:
+        what: promicro
+        params:
+          orientation: "down"
+        where:
+          ref: matrix_inner_top
+          shift: [1px, -0.18py]
+          rotate: -90
+      reset:
+        what: button
+        params:
+          from: GND
+          to: RST
+        where:
+          ref: matrix_inner_top
+          shift: [1.4px, -1.35py]
+      trrs:
+        what: trrs
+        params:
+          reverse: false
+          symmetric: false
+          A: GND
+          B: GND
+          C: P2
+          D: VCC
+        where:
+          ref: matrix_inner_home
+          shift: [1.6px, -0.3py]
+          rotate: -90
+      holeTopLeft:
+        what: mountinghole
+        where:
+          ref: matrix_pinky_num
+          shift: [-0.5kx, -0.5ky]
+      holeTopRight:
+        what: mountinghole
+        where:
+          ref: matrix_inner_num
+          shift: [0.5kx, -0.5ky]
+      holeBottomLeft:
+        what: mountinghole
+        where:
+          ref: matrix_outer_mod
+          shift: [0.5kx, -0.25ky]
+      holeBottomRight:
+        what: mountinghole
+        where:
+          ref: thumbs_space_cluster
+          shift: [0.5kx, -0.5ky]
+cases:
+  _bottom:
+    - name: board
+      extrude: 1
+  _holes:
+    - name: mounting
+      extrude: 4
+  _standoffs:
+    - name: standoff
+      extrude: 4
+  case:
+    - what: case
+      name: _standoffs
+      operation: add
+    - what: case
+      name: _holes
+      operation: subtract
+
+    - what: case
+      name: _bottom
+      operation: add

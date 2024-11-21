@@ -95,7 +95,7 @@ outlines:
   keys:
     - what: rectangle
       where: true
-      size: [kx-0.5,ky-0.5]
+      size: [15, 15]
   board:
     - what: polygon
       operation: stack
@@ -146,10 +146,10 @@ outlines:
           shift: [0.55px, 0.5py]
 
         - ref: matrix_inner_top
-          shift: [1.6px, 0.6py]
+          shift: [1.6px, 0.9py]
         - ref: matrix_inner_top
-          shift: [0.5px, 0.6py]
-  combo:
+          shift: [0.5px, 0.9py]
+  plate:
     - name: board
     - operation: subtract
       name: keys
@@ -218,13 +218,21 @@ pcbs:
           to: "{{row_net}}"
         adjust:
           shift: [0, -5]
-      mcu:
-        what: promicro
+      mcu_l:
+        what: promicro_f
         params:
           orientation: "down"
         where:
           ref: matrix_inner_top
-          shift: [1px, -0.18py]
+          shift: [1px + 1, 0.12py]
+          rotate: -90
+      mcu_r:
+        what: promicro_b
+        params:
+          orientation: "up"
+        where:
+          ref: matrix_inner_top
+          shift: [1px - 2, 0.12py]
           rotate: -90
       reset:
         what: button
@@ -233,7 +241,7 @@ pcbs:
           to: RST
         where:
           ref: matrix_inner_top
-          shift: [1.4px, -1.35py]
+          shift: [1.4px, -1.25py]
       trrs:
         what: trrs
         params:
@@ -245,7 +253,7 @@ pcbs:
           D: VCC
         where:
           ref: matrix_inner_home
-          shift: [1.6px, -0.3py]
+          shift: [1.6px, -0.1py]
           rotate: -90
       holeTopLeft:
         what: mountinghole
@@ -256,7 +264,7 @@ pcbs:
         what: mountinghole
         where:
           ref: matrix_inner_num
-          shift: [0.5kx, -0.5ky]
+          shift: [0kx, -0.5ky]
       holeBottomLeft:
         what: mountinghole
         where:
@@ -288,3 +296,6 @@ cases:
     - what: case
       name: _bottom
       operation: add
+  plate:
+    - name: plate
+      extrude: 1

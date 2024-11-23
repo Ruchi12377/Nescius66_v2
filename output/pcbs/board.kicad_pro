@@ -440,9 +440,9 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "specctra_dsn": "../../../../../Desktop/board.dsn",
+      "specctra_dsn": "board.dsn",
       "step": "",
-      "vrml": "../../../../../Desktop/board.wrl"
+      "vrml": "board.wrl"
     },
     "page_layout_descr_file": ""
   },

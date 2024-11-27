@@ -92,16 +92,20 @@ outlines:
    - what: rectangle
      where: true
      size: [px, py]
-  keys:
+  _keys:
     - what: rectangle
       where: true
-      size: [15, 15]
+      size: [14, 14]
   board:
     - what: polygon
       operation: stack
       fillet: 2
       points:
         # upper lines
+        - ref: matrix_inner_top
+          shift: [1.6px, 0.9py]
+        - ref: matrix_inner_top
+          shift: [0.5px, 0.9py]
         - ref: matrix_inner_num
           shift: [0.5px, 0.5py]
         - ref: matrix_index_num
@@ -143,16 +147,103 @@ outlines:
         - ref: thumbs_magic_cluster
           shift: [0.5px, 0.5py]
         - ref: thumbs_space_cluster
-          shift: [0.55px, 0.5py]
-
+          shift: [0.5px, 0.5py]
+  _mainPlate:
+    - what: polygon
+      operation: stack
+      fillet: 2
+      points:
+        # upper lines
+        # micro controller lines
         - ref: matrix_inner_top
           shift: [1.6px, 0.9py]
         - ref: matrix_inner_top
           shift: [0.5px, 0.9py]
-  plate:
-    - name: board
+        - ref: matrix_inner_num
+          shift: [0.5px, 0.5py]
+        - ref: matrix_index_num
+          shift: [0.5px, 0.5py]
+        - ref: matrix_middle_num
+          shift: [0.5px, 0.5py]
+        - ref: matrix_middle_num
+          shift: [-0.5px, 0.5py]
+        - ref: matrix_ring_num
+          shift: [-0.5px, 0.5py]
+        - ref: matrix_pinky_num
+          shift: [-0.5px, 0.5py]
+        - ref: matrix_outer_num
+          shift: [-0.5px, 0.5py]
+
+        # lower lines
+        - ref: matrix_outer_mod
+          shift: [-0.5px, -0.5py]
+        - ref: matrix_outer_mod
+          shift: [0.5px, -0.5py]
+        - ref: matrix_pinky_mod
+          shift: [0.5px, -0.5py]
+        - ref: matrix_ring_mod
+          shift: [0.5px, -0.5py]
+        - ref: matrix_index_mod
+          shift: [-0.5px, -0.5py]
+        - ref: matrix_index_mod
+          shift: [0px, -0.5py]
+        - ref: thumbs_base_cluster
+          shift: [-0.5px+1, -0.5py]
+        
+        - ref: thumbs_base_cluster
+          shift: [-0.5px+1, 0py]
+        - ref: thumbs_base_cluster
+          shift: [-0.5px+1, 0.6py]
+        - ref: matrix_bracket_bottom
+          shift: [-0.5px-2, -0.4py]
+
+        # vertical lines
+        - ref: matrix_bracket_bottom
+          shift: [-0.5px-2, 0.5py+2]
+        - ref: matrix_bracket_bottom
+          shift: [0.5px-0.5, 0.5py+2]
+  _subPlate:
+      - what: polygon
+        operation: stack
+        fillet: 2
+        points:
+          # vertical right lines
+          - ref: thumbs_magic_cluster
+            shift: [0.5px, -0.5py]
+          - ref: thumbs_magic_cluster
+            shift: [0.5px, 0.5py]
+          - ref: thumbs_space_cluster
+            shift: [0.5px, 0.5py]
+          - ref: matrix_bracket_bottom
+            shift: [0.5px, 0.5py]
+          
+          # vertical left lines
+          - ref: matrix_bracket_bottom
+            shift: [-0.5px, 0.5py]
+          - ref: matrix_bracket_bottom
+            shift: [-0.5px, -0.4py-2]
+          - ref: thumbs_base_cluster
+            shift: [-0.5px+2, 0.6py-2]
+          - ref: thumbs_base_cluster
+            shift: [-0.5px+2, -0.5py]
+
+          # lower lines
+          - ref: thumbs_base_cluster
+            shift: [0.5px, -0.5py]
+          - ref: thumbs_magic_cluster
+            shift: [-0.5px, -0.5py]
+  mainPlateWithKey:
+    - name: _mainPlate
     - operation: subtract
-      name: keys
+      name: _keys
+  subPlateWithKey:
+    - name: _subPlate
+    - operation: subtract
+      name: _keys
+  plate:
+    - name: mainPlateWithKey
+    - operation: add
+      name: subPlateWithKey
   mounting:
       - what: circle
         radius: screwSize
@@ -174,27 +265,6 @@ outlines:
         where:
           ref: thumbs_space_cluster
           shift: [0.5kx, -0.5ky]
-  standoff:
-    - what: circle
-      radius: standoffSize
-      where:
-        ref: matrix_pinky_num
-        shift: [-0.5kx, -0.5ky]
-    - what: circle
-      radius: standoffSize
-      where:
-        ref: matrix_inner_num
-        shift: [0.5kx, -0.5ky]
-    - what: circle
-      radius: standoffSize
-      where:
-        ref: matrix_outer_mod
-        shift: [0.5kx, -0.25ky]
-    - what: circle
-      radius: standoffSize
-      where:
-        ref: thumbs_space_cluster
-        shift: [0.5kx, -0.5ky]
 pcbs:
   board:
     outlines:
@@ -275,27 +345,3 @@ pcbs:
         where:
           ref: thumbs_space_cluster
           shift: [0.5kx, -0.5ky]
-cases:
-  _bottom:
-    - name: board
-      extrude: 1
-  _holes:
-    - name: mounting
-      extrude: 4
-  _standoffs:
-    - name: standoff
-      extrude: 4
-  case:
-    - what: case
-      name: _standoffs
-      operation: add
-    - what: case
-      name: _holes
-      operation: subtract
-
-    - what: case
-      name: _bottom
-      operation: add
-  plate:
-    - name: plate
-      extrude: 1
